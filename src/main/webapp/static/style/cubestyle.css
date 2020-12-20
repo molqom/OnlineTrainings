@@ -1,0 +1,53 @@
+
+.container {
+    position: relative;
+    margin: 40px auto;
+    width: 60px;
+    height: 60px;
+    perspective: 500px;
+}
+
+.cube {
+    width: inherit;
+    height: inherit;
+    transform-style: preserve-3d;
+
+}
+
+.side {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border: 1px solid gray;
+    font: normal 14px Arial;
+    text-align: center;
+    line-height: 60px;
+    color: black;
+    background-color: red;
+}
+
+.front {
+    transform: translateZ(30px);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(30px);
+}
+
+.left {
+    transform: rotateY(270deg) translateZ(30px);
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(30px);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(30px);
+    background-color: white;
+}
+
+.bottom {
+    transform: rotateX(270deg) translateZ(30px);
+    background-color: white;
+}

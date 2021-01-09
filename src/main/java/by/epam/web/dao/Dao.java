@@ -13,5 +13,5 @@ public interface Dao<T> {
 
     void save(T item) throws DaoException;
 
-    void removeById(long id);
+    void removeById(long id) throws DaoException;
 }

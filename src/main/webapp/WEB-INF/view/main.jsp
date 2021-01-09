@@ -22,12 +22,12 @@
     <h2><fmt:message key="main.welcome"/></h2>
     <div id="cube"><jsp:include page="parts/cube.jsp"/></div>
 
-    <ul id = "qwer">
-        <li><%=request.getAuthType()%></li>
-        <li><%=request.getContextPath()%></li>
+    <ul id = '${page}'>
+        <li><%=request.getAttribute("path")%></li>
+        <li>'${page}'</li>
         <li><%=request.getPathInfo()%></li>
         <li><%=request.getRequestURI()%></li>
-        <li><%=request.getRequestURL().toString()%></li>
+        <li><%=request.getHeaderNames()%></li>
     </ul>
 </div>
     <div id="footer">

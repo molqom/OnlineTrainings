@@ -1,7 +1,7 @@
 package by.epam.web.mapper;
 
-import by.epam.web.data.entity.Role;
-import by.epam.web.data.entity.User;
+import by.epam.web.enums.Role;
+import by.epam.web.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,8 +15,9 @@ public class UserRowMapper implements RowMapper<User> {
         String name = resultSet.getString("name");
         String surname = resultSet.getString("surname");
         Role role = Role.valueOf(resultSet.getString("roles.name").toUpperCase());
+        boolean active = resultSet.getBoolean("active");
 
-        return new User(id, login, password, name, surname, role);
+        return new User(id, login, password, name, surname, role, active);
     }
 
 }

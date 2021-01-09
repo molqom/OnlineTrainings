@@ -22,15 +22,21 @@
                 <th>name</th>
                 <th>surname</th>
                 <th>role</th>
+                <th>active</th>
             </tr>
 
             <c:forEach items="${users}" var="user">
                 <tr>
-                    <td>${course.id}</td>
-                    <td>${course.login}</td>
-                    <td>${course.name}</td>
-                    <td>${course.surname}</td>
-                    <td>${course.role}</td>
+                    <td>${user.id}</td>
+                    <td>${user.login}</td>
+                    <td>${user.name}</td>
+                    <td>${user.surname}</td>
+                    <td>${user.role}</td>
+                    <td>${user.active}</td>
+                    <td><form action="/WebApp/controller?command=lock" method="post">
+                        <button name ="lock" type="submit" value="${user.id}">Lock</button>
+                        <button name ="unlock" type="submit" value="${user.id}">Unlock</button>
+                    </form></td>
                 </tr>
             </c:forEach>
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5</title>
+</head>
+<body>
+<p>class A</p>
+<p>private String name;</p>
+<p>public String getName() {return name}</p>
+<p>public boolean equals(Object o) {</p>
+<p>if (o == this) {return true;}</p>
+<p>if (o == null || o.getClass() != this.getClass()) {return false;}</p>
+<p>String newO = (String)o;</p>
+<p>return o.getName().equals(this.getName());</p>
+<p>}</p>
+</body>
+</html>

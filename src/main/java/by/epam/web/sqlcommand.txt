@@ -56,3 +56,18 @@ insert courses (name, teacher_id) values ('SQL', 4);
 insert courses (name, teacher_id) values ('XML', 4);
 insert courses (name, teacher_id) values ('English for developers', 5);
 insert courses (name, teacher_id) values ('Full courser java', 3);
+
+//create table subscriptions
+create table subscriptions (
+                               `id` int unsigned not null auto_increment,
+                               `user_id` int unsigned default null,
+                               `course_id` int unsigned default null,
+                               `grade` int default null,
+                               `feedback` text DEFAULT NULL,
+                               PRIMARY KEY (`id`),
+                               foreign key (user_id) references users(id),
+                               foreign key (course_id) references courses(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into subscriptions (user_id, course_id, grade, feedback)
+values (2, 7, 5, 'All right!');

@@ -2,13 +2,12 @@ package by.epam.web.service;
 
 import by.epam.web.dao.DaoHelper;
 import by.epam.web.dao.DaoHelperFactory;
-import by.epam.web.dao.UserDao;
-import by.epam.web.data.entity.User;
+import by.epam.web.dao.user.UserDao;
+import by.epam.web.entity.User;
 import by.epam.web.exception.DaoException;
 import by.epam.web.exception.ServiceException;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class RegistrationService {
     private DaoHelperFactory daoHelperFactory;

@@ -2,7 +2,9 @@ package by.epam.web.controller;
 
 import by.epam.web.command.Command;
 import by.epam.web.command.CommandFactory;
+import by.epam.web.entity.CommandResult;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,15 +27,22 @@ public class Servlet extends HttpServlet {
         try {
             String commandParam = req.getParameter("command");
             Command command = CommandFactory.create(commandParam);
-            String page = command.execute(req, resp);
-            dispatch(page, req, resp);
+            CommandResult commandResult = command.execute(req, resp);
+            dispatch(commandResult, req, resp);
         } catch (ServletException e) {
             e.printStackTrace();
         }
     }
 
-    private void dispatch(final String page, HttpServletRequest req, HttpServletResponse resp)
+    private void dispatch(CommandResult commandResult, HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher(page).forward(req, resp);
+        String url = commandResult.getUrl();
+        boolean isRedirect = commandResult.isRedirect();
+        if (isRedirect){
+            resp.sendRedirect(url);
+        } else {
+            RequestDispatcher dispatcher = req.getRequestDispatcher(url);
+            dispatcher.forward(req,resp);
+        }
     }
 }

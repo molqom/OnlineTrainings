@@ -1,6 +1,6 @@
 package by.epam.web.mapper;
 
-import by.epam.web.data.entity.Course;
+import by.epam.web.entity.Course;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -5,8 +5,8 @@
     <h1>
         ${successMessage}
         <form method="POST" action="/WebApp/controller?command=login">
-            <input type="text" name="login"/>
-            <input type="password" name="password"/>
+            <input type="text" name="login" value="teacher"/>
+            <input type="password" name="password" value="teacher"/>
             <input type="submit"/>
         </form>
         ${errorMessage}

@@ -19,27 +19,51 @@
 <jsp:include page="parts/header.jsp"/>
 <jsp:include page="parts/menu.jsp"/>
 
-<%--<table id="table"></table>--%>
-<%--<ul id="pagination"></ul>--%>
 <div class="info">
-<h1>Trainings list:</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Teacher</th>
-    </tr>
-
-    <c:forEach items="${courses}" var="course">
+    <h1>Trainings list:</h1>
+    <h2>${errorMessage}</h2>
+    <table>
         <tr>
-            <td>${course.name}</td>
-            <td>${course.teacherName}</td>
+            <th>Name</th>
+            <th>Teacher</th>
         </tr>
-    </c:forEach>
 
-</table>
-<ul id="pages">
+        <c:forEach items="${courses}" var="course">
+            <tr>
+                <td>${course.name}</td>
+                <td>${course.teacherName}</td>
+                <c:if test="${role.equals('ADMIN')}">
+                    <td>
+                        <form action="/WebApp/controller?command=deleteCourse" method="post">
+                            <button name="delete" type="submit" value="${course.id}">Delete</button>
+                        </form>
+                    </td>
+                </c:if>
+                <c:if test="${role.equals('USER')}">
+                    <td>
+                        <form action="/WebApp/controller?command=subscribe" method="post">
+                            <button name="course_id" type="submit" value="${course.id}">Subscribe</button>
+                        </form>
+                    </td>
+                </c:if>
+            </tr>
+        </c:forEach>
 
-</ul>
+    </table>
+    <ul id="pages">
+
+    </ul>
+    <c:if test="${role.equals('ADMIN')}">
+        <form action="/WebApp/controller?command=addCourse" method="post">
+            <label>
+                <input name="name" type="text"/>Name of course
+            </label>
+            <label>
+                <input name="teacher_id" type="text"/>Teacher id
+            </label>
+            <button type="submit">Add course</button>
+        </form>
+    </c:if>
 </div>
 <script>
     let pages = document.querySelector('#pages');

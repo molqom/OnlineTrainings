@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
-    private static final String TABLE_NAME = "courses";
 
     public CourseDaoImpl(Connection connection) {
         super(connection);
@@ -44,8 +43,12 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     }
 
     @Override
-    public Optional<Course> getById(long id) {
-        return Optional.empty();
+    public Optional<Course> getById(long id) throws DaoException {
+        return executeForSingleResult(
+                Sql.GET_COURSE_BY_ID.getQuery(),
+                new CourseRowMapper(),
+                id
+        );
     }
 
     @Override
@@ -54,7 +57,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     }
 
     @Override
-    public void save(Course item) throws DaoException {
+    public void add(Course item) throws DaoException {
         String name = item.getName();
         long teacherId = item.getTeacherId();
 

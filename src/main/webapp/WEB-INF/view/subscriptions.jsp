@@ -21,7 +21,7 @@
 <div class="info">
     <h1>Subscriptions</h1>
 
-    <table>
+    <table class="table">
         <tr>
             <th>Course name</th>
             <th>Teacher name</th>
@@ -35,16 +35,27 @@
                 <td>${subscription.courseName}</td>
                 <td>${subscription.teacherName}</td>
                 <td>${subscription.teacherSurname}</td>
-                <td>${subscription.grade}</td>
+                <c:if test="${subscription.grade != 0}">
+                    <td>${subscription.grade}</td>
+                </c:if>
+                <c:if test="${subscription.grade == 0}">
+                    <td></td>
+                </c:if>
                 <td>${subscription.feedback}</td>
-                <td><form action="/WebApp/controller?command=unsubscribe" method="post">
-                    <button name ="subscription_id" type="submit" value="${subscription.id}">Unsubscribe</button>
-                </form></td>
+                <td>
+                    <form action="/WebApp/controller?command=unsubscribe" method="post">
+                        <button class="lock-button" name="subscription_id" type="submit" value="${subscription.id}">
+                            Unsubscribe
+                        </button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
 
     </table>
 </div>
-
+<div id="footer">
+    <jsp:include page="parts/footer.jsp"/>
+</div>
 </body>
 </html>

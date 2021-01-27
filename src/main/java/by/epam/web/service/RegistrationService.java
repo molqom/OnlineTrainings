@@ -22,7 +22,7 @@ public class RegistrationService {
         User user = new User(login, password, name, surname);
         try(DaoHelper daoHelper = daoHelperFactory.create()){
             UserDao dao = daoHelper.createUserDao();
-            dao.save(user);
+            dao.add(user);
         } catch (DaoException | SQLException e) {
             throw new ServiceException(e.getMessage());
         }

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>List of courses:</h2>
-<table>
+<table class="table">
     <tr>
         <th>id</th>
         <th>name</th>
@@ -22,7 +22,7 @@
             <td>${course.name}</td>
             <td>${course.teacher_id}</td>
             <td><form action="/WebApp/controller?command=deleteCourse" method="post">
-                <button name ="delete" type="submit" value="${course.id}">Lock</button>
+                <button class="lock-button" name ="delete" type="submit" value="${course.id}">Delete</button>
             </form></td>
         </tr>
     </c:forEach>
@@ -33,5 +33,8 @@
     <input name="teacher-id" type="text"/>
     <button type="submit">Add course</button>
 </form>
+<div id="footer">
+    <jsp:include page="parts/footer.jsp"/>
+</div>
 </body>
 </html>

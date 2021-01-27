@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable{
     private final ProxyConnection connection;
-    public DaoHelper(ConnectionPool pool) throws DaoException {
+    public DaoHelper(ConnectionPool pool) {
         this.connection = pool.getConnection();
     }
     public UserDao createUserDao() {
@@ -26,16 +26,9 @@ public class DaoHelper implements AutoCloseable{
     public SubscriptionDao createSubscriptionDao(){
         return new SubscriptionDaoImpl(connection);
     }
+
     @Override
     public void close() throws SQLException {
         connection.close();
-    }
-
-    public void startTransaction() throws DaoException {
-        try {
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
     }
 }

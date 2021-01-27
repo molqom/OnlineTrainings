@@ -1,17 +1,17 @@
 package by.epam.web.command.user;
 
 import by.epam.web.command.Command;
-import by.epam.web.command.teacher.FeedbackCommand;
+import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
 import by.epam.web.entity.Course;
 import by.epam.web.enums.Url;
 import by.epam.web.exception.DaoException;
+import by.epam.web.exception.ServiceException;
 import by.epam.web.service.TrainingsService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class TrainingsCommand implements Command {
@@ -26,11 +26,8 @@ public class TrainingsCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("id") == null) {
-            return CommandResult.redirect(Url.LOGIN_CMD);
-        }
-        String numOfPageParameter = request.getParameter("numOfPage");
+
+        String numOfPageParameter = request.getParameter(Parameter.NUM_OF_PAGE);
 
         int pagesQuantity = 0;
         try {
@@ -39,22 +36,23 @@ public class TrainingsCommand implements Command {
             LOGGER.info(e.getMessage(), e);
         }
         int numOfPage;
-        if (numOfPageParameter==null){
+        if (numOfPageParameter == null) {
             numOfPage = 1;
         } else {
             numOfPage = Integer.parseInt(numOfPageParameter);
         }
 
-        List<Course> courses = null;
+        List<Course> courses;
         try {
             courses = service.createListOfCourses(numOfPage, COURSE_QUANTITY_ON_PAGE);
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             LOGGER.info(e.getMessage(), e);
             return CommandResult.forward(Url.ERROR_500);
         }
 
-        request.setAttribute("pagesQuantity",pagesQuantity);
-        request.setAttribute("courses", courses);
+        request.setAttribute(Parameter.PAGES_QUANTITY, pagesQuantity);
+        request.setAttribute(Parameter.COURSES, courses);
+        request.setAttribute(Parameter.NUM_OF_PAGE, numOfPage);
         return CommandResult.forward(Url.TRAININGS_PAGE);
 
     }

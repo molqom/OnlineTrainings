@@ -10,6 +10,18 @@ public class RegistrationValidator {
                          String password,
                          String repeatPassword)
             throws CredentialValidException {
+        if (username == null) {
+            throw new CredentialValidException("Username field can not be empty");
+
+        }
+        if (password == null) {
+            throw new CredentialValidException("Password field can not be empty");
+
+        }
+        if (repeatPassword == null) {
+            throw new CredentialValidException("Repeat password field can not be empty");
+
+        }
         if (!username.matches(USERNAME_REGEX)){
             throw new CredentialValidException("Invalid username. Username must contain 4-16 symbols");
         }

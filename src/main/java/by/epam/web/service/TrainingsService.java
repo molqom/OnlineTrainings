@@ -17,12 +17,12 @@ public class TrainingsService {
         this.factory = factory;
     }
 
-    public List<Course> createListOfCourses(int numOfPage, int courseQuantityOnPage) throws DaoException {
+    public List<Course> createListOfCourses(int numOfPage, int courseQuantityOnPage) throws ServiceException {
         try (DaoHelper daoHelper = factory.create()) {
             CourseDao dao = daoHelper.createCourseDao();
             return dao.createList(numOfPage, courseQuantityOnPage);
-        } catch (SQLException | DaoException throwables) {
-            throw new DaoException("oops this is trouble...");
+        } catch (SQLException | DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
         }
     }
     public int calculatePagesQuantity(int courseQuantityOnPage) throws DaoException {
@@ -36,7 +36,7 @@ public class TrainingsService {
         }
     }
     public List<Course> findCoursesByTeacherId(long id) throws DaoException {
-        try (DaoHelper daoHelper = factory.create()) {
+        try (DaoHelper daoHelper = DaoHelperFactory.create()) {
             CourseDao dao = daoHelper.createCourseDao();
             return dao.findCoursesByTeacherId(id);
         } catch (SQLException | DaoException throwables) {
@@ -56,7 +56,7 @@ public class TrainingsService {
         try (DaoHelper daoHelper = factory.create()) {
             CourseDao dao = daoHelper.createCourseDao();
             Course course = new Course(name, teacherId);
-            dao.save(course);
+            dao.add(course);
         } catch (DaoException | SQLException e){
             //logg
             throw new ServiceException(e.getMessage());

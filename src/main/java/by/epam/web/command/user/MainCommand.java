@@ -6,17 +6,10 @@ import by.epam.web.enums.Url;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class MainCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("id")!=null) {
-            return CommandResult.forward(Url.MAIN_PAGE);
-        }
-        else {
-            return CommandResult.forward(Url.LOGIN_PAGE);
-        }
+        return CommandResult.forward(Url.MAIN_PAGE);
     }
 }

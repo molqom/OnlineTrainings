@@ -23,5 +23,8 @@
 </c:forEach>
 </ul>
 </div>
+<div id="footer">
+    <jsp:include page="parts/footer.jsp"/>
+</div>
 </body>
 </html>

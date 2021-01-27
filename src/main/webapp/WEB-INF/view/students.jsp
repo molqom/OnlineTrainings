@@ -20,7 +20,7 @@
 <jsp:include page="parts/menu.jsp"/>
 <div class="info">
     <h1>Students:</h1>
-    <table>
+    <table class="table">
         <tr>
             <th>Course name</th>
             <th>Student name</th>
@@ -50,7 +50,7 @@
                                 <option value="10">10</option>
                             </select>
                             <input type="hidden" name="subscription_id" value="${subscription.id}">
-                            <input type="submit">
+                            <button class="submit" type="submit">Confirm</button>
                         </form>
                     </td>
                 </c:if>
@@ -61,10 +61,10 @@
                     <td>
                         <form action="/WebApp/controller?command=feedback" method="post">
                             <label>
-                                <input type="text" name="comment">
+                                <input type="text" name="feedback">
                             </label>
                             <input type="hidden" name="subscription_id" value="${subscription.id}">
-                            <input type="submit">
+                            <button class="submit" type="submit">Confirm</button>
                         </form>
                     </td>
                 </c:if>
@@ -75,6 +75,9 @@
         </c:forEach>
 
     </table>
+    <div id="footer">
+        <jsp:include page="parts/footer.jsp"/>
+    </div>
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 package by.epam.web.command.user;
 
 import by.epam.web.command.Command;
-import by.epam.web.command.teacher.FeedbackCommand;
+import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
 import by.epam.web.entity.Subscription;
 import by.epam.web.enums.Url;
@@ -26,13 +26,10 @@ public class SubscriptionsCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("id")==null){
-            return CommandResult.forward(Url.LOGIN_PAGE);
-        }
-        long userId = (long)session.getAttribute("id");
+        long userId = (long)session.getAttribute(Parameter.ID);
         try {
             List<Subscription> subscriptions = service.findSubscriptions(userId);
-            request.setAttribute("subscriptions", subscriptions);
+            request.setAttribute(Parameter.SUBSCRIPTIONS, subscriptions);
             return CommandResult.forward(Url.SUBSCRIPTIONS_PAGE);
         } catch (ServiceException e) {
             LOGGER.info(e.getMessage(), e);

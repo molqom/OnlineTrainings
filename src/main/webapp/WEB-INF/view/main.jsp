@@ -16,22 +16,18 @@
     <title>Online trainings</title>
 </head>
 <body>
-    <jsp:include page="parts/header.jsp"/>
-    <jsp:include page="parts/menu.jsp"/>
+<jsp:include page="parts/header.jsp"/>
+<jsp:include page="parts/menu.jsp"/>
 <div class="info">
     <h2><fmt:message key="main.welcome"/></h2>
-    <div id="cube"><jsp:include page="parts/cube.jsp"/></div>
-
-    <ul id = '${page}'>
-        <li><%=request.getAttribute("path")%></li>
-        <li>'${page}'</li>
-        <li><%=request.getPathInfo()%></li>
-        <li><%=request.getRequestURI()%></li>
-        <li><%=request.getHeaderNames()%></li>
-    </ul>
-</div>
-    <div id="footer">
-    <jsp:include page="parts/footer.jsp"/>
+    <div id="cube">
+        <jsp:include page="parts/cube.jsp"/>
     </div>
+
+
+</div>
+<div id="footer">
+    <jsp:include page="parts/footer.jsp"/>
+</div>
 </body>
 </html>

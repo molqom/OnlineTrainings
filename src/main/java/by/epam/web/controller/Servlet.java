@@ -2,7 +2,9 @@ package by.epam.web.controller;
 
 import by.epam.web.command.Command;
 import by.epam.web.command.CommandFactory;
+import by.epam.web.connection.ConnectionPool;
 import by.epam.web.entity.CommandResult;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Servlet extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(Servlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         process(req, resp);
@@ -44,5 +47,16 @@ public class Servlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher(url);
             dispatcher.forward(req,resp);
         }
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            ConnectionPool connectionPool = ConnectionPool.getInstance();
+            connectionPool.destroy();
+        } catch (Exception e) {
+            LOGGER.info(e.getMessage(), e);
+        }
+        super.destroy();
     }
 }

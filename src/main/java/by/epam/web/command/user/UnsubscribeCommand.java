@@ -1,6 +1,7 @@
 package by.epam.web.command.user;
 
 import by.epam.web.command.Command;
+import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
 import by.epam.web.enums.Url;
 import by.epam.web.exception.ServiceException;
@@ -9,7 +10,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class UnsubscribeCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(UnsubscribeCommand.class);
@@ -21,11 +21,8 @@ public class UnsubscribeCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("id") == null) {
-            return CommandResult.forward(Url.LOGIN_PAGE);
-        }
-        String subscriptionIdParam = request.getParameter("subscription_id");
+
+        String subscriptionIdParam = request.getParameter(Parameter.SUBSCRIPTION_ID);
         long subscriptionId = Long.parseLong(subscriptionIdParam);
         try {
             service.unsubscribe(subscriptionId);

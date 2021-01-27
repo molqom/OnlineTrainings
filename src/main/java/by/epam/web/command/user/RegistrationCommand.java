@@ -1,6 +1,7 @@
 package by.epam.web.command.user;
 
 import by.epam.web.command.Command;
+import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
 import by.epam.web.enums.Url;
 import by.epam.web.exception.CredentialValidException;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
+    private static final String ERROR_MESSAGE = "User with this username already exist";
+    private static final String SUCCESS_MESSAGE = "Registration is success! Now you can log in";
 
     private final RegistrationService service;
 
@@ -23,11 +26,12 @@ public class RegistrationCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String repeatPassword = request.getParameter("repeat-password");
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
+
+        String login = request.getParameter(Parameter.LOGIN);
+        String password = request.getParameter(Parameter.PASSWORD);
+        String repeatPassword = request.getParameter(Parameter.REPEAT_PASSWORD);
+        String name = request.getParameter(Parameter.NAME);
+        String surname = request.getParameter(Parameter.SURNAME);
 
         boolean valid = false;
         //if username!valid error mess
@@ -36,8 +40,8 @@ public class RegistrationCommand implements Command {
             RegistrationValidator validator = new RegistrationValidator();
             validator.valid(login, password, repeatPassword);
         } catch (CredentialValidException e) {
-            request.setAttribute("errorMessage", e.getMessage());
-            return CommandResult.redirect(Url.REGISTRATION_PAGE);
+            request.setAttribute(Parameter.ERROR_MESSAGE, e.getMessage());
+            return CommandResult.forward(Url.REGISTRATION_PAGE);
         }
         try {
             service.registration(login, password, name, surname);
@@ -47,10 +51,10 @@ public class RegistrationCommand implements Command {
             e.printStackTrace();
         }
         if (valid) {
-            request.setAttribute("successMessage", "Registration is success! Now you can log in");
+            request.setAttribute(Parameter.SUCCESS_MESSAGE, SUCCESS_MESSAGE);
             return CommandResult.redirect(Url.LOGIN_CMD);
         } else {
-            request.setAttribute("errorMessage", "User with this username already exist");
+            request.setAttribute(Parameter.ERROR_MESSAGE, ERROR_MESSAGE);
             return CommandResult.redirect(Url.REGISTRATION_PAGE);
         }
     }

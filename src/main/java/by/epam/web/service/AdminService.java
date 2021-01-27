@@ -18,7 +18,7 @@ public class AdminService {
     }
 
     public List<User> createListOfUsers() throws ServiceException {
-        try(DaoHelper daoHelper = daoHelperFactory.create()) {
+        try(DaoHelper daoHelper = DaoHelperFactory.create()) {
             UserDao dao = daoHelper.createUserDao();
             return dao.getAll();
         } catch (SQLException | DaoException e) {

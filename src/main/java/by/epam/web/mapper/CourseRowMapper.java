@@ -12,7 +12,8 @@ public class CourseRowMapper implements RowMapper<Course> {
         long id = resultSet.getLong("id");
         String name = resultSet.getString("name");
         String teacherName = resultSet.getString("users.name");
-        return new Course(id, name, teacherName);
+        String teacherSurname = resultSet.getString("users.surname");
+        return new Course(id, name, teacherName, teacherSurname);
     }
 
     public int calculateCourseQuantity(ResultSet resultSet) throws SQLException{

@@ -31,7 +31,7 @@ public class SubscriptionDaoImpl extends AbstractDao<Subscription> implements Su
     }
 
     @Override
-    public void save(Subscription item) throws DaoException {
+    public void add(Subscription item) throws DaoException {
         long userId = item.getUserId();
         long courseId = item.getCourseId();
         execute(ADD_SUBSCRIPTION, userId, courseId);

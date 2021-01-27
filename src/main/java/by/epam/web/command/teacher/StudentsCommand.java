@@ -1,8 +1,8 @@
 package by.epam.web.command.teacher;
 
 import by.epam.web.command.Command;
+import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
-import by.epam.web.enums.Role;
 import by.epam.web.entity.Subscription;
 import by.epam.web.enums.Url;
 import by.epam.web.exception.ServiceException;
@@ -26,17 +26,15 @@ public class StudentsCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        if (!session.getAttribute("role").equals(Role.TEACHER.toString())) {
-            return CommandResult.redirect(Url.LOGOUT_CMD);
-        }
+
         try {
-            long teacherId = (long) session.getAttribute("id");
+            long teacherId = (long) session.getAttribute(Parameter.ID);
             List<Subscription> subscriptions = service.findStudents(teacherId);
-            request.setAttribute("subscriptions", subscriptions);
+            request.setAttribute(Parameter.SUBSCRIPTIONS, subscriptions);
+            return CommandResult.forward(Url.STUDENTS_PAGE);
         } catch (ServiceException e) {
             LOGGER.info(e.getMessage(), e);
             return CommandResult.forward(Url.ERROR_500);
         }
-        return CommandResult.forward(Url.STUDENTS_PAGE);
     }
 }

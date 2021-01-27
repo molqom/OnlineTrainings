@@ -4,12 +4,14 @@ public class Course {
     private long id;
     private String name;
     private String teacherName;
+    private String teacherSurname;
     private long teacherId;
 
-    public Course(long id, String name, String teacherName) {
+    public Course(long id, String name, String teacherName, String teacherSurname) {
         this.id = id;
         this.name = name;
         this.teacherName = teacherName;
+        this.teacherSurname = teacherSurname;
     }
 
     public Course(String name, long teacherId) {
@@ -43,5 +45,13 @@ public class Course {
 
     public String getTeacherName() {
         return teacherName;
+    }
+
+    public String getTeacherSurname() {
+        return teacherSurname;
+    }
+
+    public void setTeacherSurname(String teacherSurname) {
+        this.teacherSurname = teacherSurname;
     }
 }

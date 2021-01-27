@@ -22,7 +22,7 @@ public class SubscriptionService {
             SubscriptionDao dao = daoHelper.createSubscriptionDao();
             Subscription subscription = new Subscription(courseId, userId);
             if (!dao.isSubscriptionExist(courseId, userId)) {
-                dao.save(subscription);
+                dao.add(subscription);
                 return true;
             }
             return false;

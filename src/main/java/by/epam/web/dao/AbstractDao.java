@@ -48,21 +48,6 @@ public abstract class AbstractDao<T> implements Dao<T> {
         return statement;
     }
 
-    @Override
-    public List<T> getAll() throws DaoException {
-        String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        return executeQuery("SELECT * FROM " + table, mapper);
-    }
-
-    @Override
-    public void save(T item) throws DaoException {
-        String query = "INSERT users(user_name, user_pswd) VALUES(?, sha1(?))";
-        String login;
-        Object[] params = new Object[]{"asd", "adas"};
-        boolean isExecute = false;
-    }
-
     protected Optional<T> executeForSingleResult(
             String query,
             RowMapper<T> builder,

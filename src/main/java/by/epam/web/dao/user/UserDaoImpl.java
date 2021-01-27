@@ -52,7 +52,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public void save(User item) throws DaoException {
+    public void add(User item) throws DaoException {
         String login = item.getLogin();
         String password = item.getPassword();
         String name = item.getName();

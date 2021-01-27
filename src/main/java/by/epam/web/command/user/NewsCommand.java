@@ -16,7 +16,7 @@ public class NewsCommand implements Command {
             return CommandResult.forward(Url.NEWS_PAGE);
         }
         else {
-            return CommandResult.forward(Url.LOGIN_CMD);
+            return CommandResult.forward(Url.LOGIN_PAGE);
         }
     }
 }

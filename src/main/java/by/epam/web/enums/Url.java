@@ -3,8 +3,8 @@ package by.epam.web.enums;
 public enum Url {
     ERROR_400("/WEB-INF/view/error/400.jsp"),
     ERROR_500("/WEB-INF/view/error/500.jsp"),
-    ADMIN_PAGE("/WEB-INF/view/admin.jsp"),
-    ADMIN_CMD("/WebApp/controller?command=admin"),
+    USERS_MANAGE_PAGE("/WEB-INF/view/usersManage.jsp"),
+    USERS_MANAGE_CMD("/WebApp/controller?command=usersManage"),
     LOGIN_CMD("/WebApp/controller?command=login"),
     LOGIN_PAGE("/WEB-INF/view/login.jsp"),
     LOGOUT_CMD("/WebApp/controller?command=logout"),

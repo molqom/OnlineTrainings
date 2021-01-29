@@ -22,23 +22,15 @@
         <filter-name>AuthenticateFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--    <servlet>-->
-    <!--        <servlet-name>test</servlet-name>-->
-    <!--        <jsp-file>/WEB-INF/view/test.jsp</jsp-file>-->
-    <!--    </servlet>-->
-    <!--    <servlet-mapping>-->
-    <!--        <servlet-name>test</servlet-name>-->
-    <!--        <url-pattern>/test</url-pattern>-->
-    <!--    </servlet-mapping>-->
 
-    <!--    <error-page>-->
-    <!--        <error-code>404</error-code>-->
-    <!--        <location>/WEB-INF/view/error/400.jsp</location>-->
-    <!--    </error-page>-->
-    <!--    <error-page>-->
-    <!--        <error-code>500</error-code>-->
-    <!--        <location>/WEB-INF/view/error/500.jsp</location>-->
-    <!--    </error-page>-->
+        <error-page>
+            <error-code>404</error-code>
+            <location>/WEB-INF/view/error/400.jsp</location>
+        </error-page>
+        <error-page>
+            <error-code>500</error-code>
+            <location>/WEB-INF/view/error/500.jsp</location>
+        </error-page>
     <jsp-config>
         <taglib>
             <taglib-uri>trainingsTags</taglib-uri>

@@ -18,6 +18,9 @@ public class CommandResult {
     public static CommandResult forward(Url page) {
         return new CommandResult(page, false);
     }
+    public static CommandResult forward(String page) {
+        return new CommandResult(page, false);
+    }
 
     public static CommandResult redirect(Url page) {
         return new CommandResult(page, true);

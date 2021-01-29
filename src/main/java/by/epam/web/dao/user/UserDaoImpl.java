@@ -4,6 +4,7 @@ import by.epam.web.dao.AbstractDao;
 import by.epam.web.entity.User;
 import by.epam.web.enums.Sql;
 import by.epam.web.exception.DaoException;
+import by.epam.web.mapper.CountRowMapper;
 import by.epam.web.mapper.UserRowMapper;
 
 import java.sql.Connection;
@@ -73,10 +74,21 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public List<User> getAll() throws DaoException {
+    public List<User> getAll(int numOfPage, int usersQuantityOnPage) throws DaoException {
+        int numFirstUserOnPage = (numOfPage - 1) * usersQuantityOnPage;
         return executeQuery(
                 Sql.FIND_ALL_USERS.getQuery(),
-                new UserRowMapper());
+                new UserRowMapper(),
+                usersQuantityOnPage,
+                numFirstUserOnPage);
+    }
+
+    @Override
+    public int getUsersQuantity() throws DaoException {
+        List<Integer> count = executeQuery(
+                Sql.FIND_USER_QUANTITY.getQuery(),
+                new CountRowMapper());
+        return count.get(0);
     }
 
     @Override

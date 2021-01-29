@@ -4,6 +4,8 @@
 <%@ page isELIgnored="false" %>
 
 <c:set var="current" value="${sessionScope.lang}" scope="session"/>
+<c:set var="pagination" value="/WebApp/controller?command=students"/>
+
 <c:if test="${not empty current}">
     <fmt:setLocale value="${sessionScope.lang}"/>
 </c:if>
@@ -13,7 +15,7 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style/cubestyle.css">
-    <title>Students</title>
+    <title>Online trainings</title>
 </head>
 <body>
 <jsp:include page="parts/header.jsp"/>
@@ -22,11 +24,11 @@
     <h1>Students:</h1>
     <table class="table">
         <tr>
-            <th>Course name</th>
-            <th>Student name</th>
-            <th>Student surname</th>
-            <th>Grade</th>
-            <th>Feedback</th>
+            <th><fmt:message key="table.course.name"></th>
+            <th><fmt:message key="table.student.name"></th>
+            <th><fmt:message key="table.student.surname"></th>
+            <th><fmt:message key="table.grade"></th>
+            <th><fmt:message key="table.feedback"></th>
         </tr>
 
         <c:forEach items="${subscriptions}" var="subscription">
@@ -75,9 +77,17 @@
         </c:forEach>
 
     </table>
+    <ul id="pagination">
+    </ul>
     <div id="footer">
         <jsp:include page="parts/footer.jsp"/>
     </div>
 </div>
+<script>
+    let currentPage = ${numOfPage};
+    let pagesQuantity = ${pagesQuantity};
+    let pagination = '${pagination}';
+</script>
+<script src="<c:url value="/static/js/coursesPagination.js"/>"></script>
 </body>
 </html>

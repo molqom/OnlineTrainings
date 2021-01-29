@@ -35,7 +35,7 @@
     <input type="password" placeholder="Repeat password" name="repeat-password" pattern="\w{8,32}"
            title="Username must have from 8 to 32 symbols" required/>
 
-    <button class="submit" type="submit">Register</button>
+    <button class="submit" type="submit"><fmt:message key="button.register"></button>
 </form>
 </div>
 <div id="footer">

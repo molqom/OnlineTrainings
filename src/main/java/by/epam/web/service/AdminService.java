@@ -17,10 +17,10 @@ public class AdminService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public List<User> createListOfUsers() throws ServiceException {
+    public List<User> createListOfUsers(int numOfPage, int usersQuantityOnPage) throws ServiceException {
         try(DaoHelper daoHelper = DaoHelperFactory.create()) {
             UserDao dao = daoHelper.createUserDao();
-            return dao.getAll();
+            return dao.getAll(numOfPage, usersQuantityOnPage);
         } catch (SQLException | DaoException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -38,6 +38,16 @@ public class AdminService {
             UserDao dao = daoHelper.createUserDao();
             dao.unlockUser(id);
         } catch (SQLException | DaoException e){
+            throw new ServiceException(e.getMessage());
+        }
+    }
+    public int calculatePagesQuantity(int usersQuantityOnPage) throws ServiceException {
+        try(DaoHelper daoHelper = DaoHelperFactory.create()) {
+            UserDao dao = daoHelper.createUserDao();
+            int usersQuantity = dao.getUsersQuantity();
+            return  (int)Math.ceil((double)usersQuantity / usersQuantityOnPage);
+
+        } catch (SQLException | DaoException e) {
             throw new ServiceException(e.getMessage());
         }
     }

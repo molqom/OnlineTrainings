@@ -5,7 +5,6 @@ public class Parameter {
     public final static String ROLE = "role";
     public final static String ERROR_MESSAGE = "errorMessage";
     public final static String NAME = "name";
-    public final static String TEACHER_ID = "teacher_id";
     public final static String DELETE = "delete";
     public final static String LOCK = "lock";
     public final static String UNLOCK = "unlock";

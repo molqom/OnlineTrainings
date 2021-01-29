@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Course manage</title>
+    <title>Online trainings</title>
 </head>
 <body>
 <h2>List of courses:</h2>
@@ -22,7 +22,7 @@
             <td>${course.name}</td>
             <td>${course.teacher_id}</td>
             <td><form action="/WebApp/controller?command=deleteCourse" method="post">
-                <button class="lock-button" name ="delete" type="submit" value="${course.id}">Delete</button>
+                <button class="lock-button" name ="delete" type="submit" value="${course.id}"><fmt:message key="button.delete" </button>
             </form></td>
         </tr>
     </c:forEach>

@@ -4,7 +4,6 @@ import by.epam.web.command.admin.*;
 import by.epam.web.command.teacher.FeedbackCommand;
 import by.epam.web.command.teacher.RateCommand;
 import by.epam.web.command.teacher.StudentsCommand;
-import by.epam.web.command.teacher.TeachersCommand;
 import by.epam.web.command.user.*;
 import by.epam.web.constant.Cmd;
 import by.epam.web.dao.DaoHelperFactory;
@@ -19,16 +18,8 @@ public class CommandFactory {
                 return new RegistrationCommand(new RegistrationService(new DaoHelperFactory()));
             case Cmd. REGISTRATION_PAGE:
                 return new RegistrationPageCommand();
-            case "info" :
-                return new InfoCommand();
             case Cmd.MAIN:
                 return new MainCommand();
-            case "contacts" :
-                return new ContactsCommand();
-            case "news" :
-                return new NewsCommand();
-            case Cmd.TEACHERS:
-                return new TeachersCommand(new TrainingsService(new DaoHelperFactory()));
             case Cmd.TRAININGS:
                 return new TrainingsCommand(new TrainingsService(new DaoHelperFactory()));
             case Cmd.LOGOUT:
@@ -47,8 +38,6 @@ public class CommandFactory {
                 return new SubscribeCommand(new SubscriptionService(new DaoHelperFactory()));
             case Cmd.SUBSCRIPTIONS:
                 return new SubscriptionsCommand(new SubscriptionService(new DaoHelperFactory()));
-            case Cmd.ADD_COURSE:
-                return new AddCourseCommand(new TrainingsService(new DaoHelperFactory()));
             case Cmd.DELETE_COURSE:
                 return new DeleteCourseCommand(new TrainingsService(new DaoHelperFactory()));
             case Cmd.STUDENTS:

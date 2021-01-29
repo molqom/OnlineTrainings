@@ -4,6 +4,7 @@ import by.epam.web.dao.AbstractDao;
 import by.epam.web.entity.Subscription;
 import by.epam.web.enums.Sql;
 import by.epam.web.exception.DaoException;
+import by.epam.web.mapper.CountRowMapper;
 import by.epam.web.mapper.SubscriptionRowMapper;
 
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class SubscriptionDaoImpl extends AbstractDao<Subscription> implements Su
     }
 
     @Override
-    public List<Subscription> getAll() throws DaoException {
+    public List<Subscription> getAll(int numOfPage, int subscriptionQuantityOnPage) throws DaoException {
         return null;
     }
 
@@ -50,19 +51,30 @@ public class SubscriptionDaoImpl extends AbstractDao<Subscription> implements Su
     }
 
     @Override
-    public List<Subscription> getSubscriptionsByUserId(long userId) throws DaoException {
+    public List<Subscription> getSubscriptionsByUserId(
+            long userId,
+            int numOfPage,
+            int subscriptionQuantityOnPage) throws DaoException {
+        int numberFirstSubscriptionOnPage = (numOfPage - 1) * subscriptionQuantityOnPage;
+
         return executeQuery(
                 Sql.FIND_SUBSCRIPTIONS_BY_USER_ID.getQuery(),
                 new SubscriptionRowMapper(),
-                userId);
+                userId,
+                subscriptionQuantityOnPage,
+                numberFirstSubscriptionOnPage);
     }
 
     @Override
-    public List<Subscription> getSubscriptionsByTeacherId(long teacherId) throws DaoException {
+    public List<Subscription> getSubscriptionsByTeacherId(long teacherId, int numOfPage, int studentsQuantityOnPage)
+            throws DaoException {
+        int numFirstStudentOnPage = (numOfPage - 1) * studentsQuantityOnPage;
         return executeQuery(
                 Sql.FIND_SUBSCRIPTIONS_BY_TEACHER_ID.getQuery(),
                 new SubscriptionRowMapper(),
-                teacherId);
+                teacherId,
+                studentsQuantityOnPage,
+                numFirstStudentOnPage);
     }
 
     @Override
@@ -84,5 +96,23 @@ public class SubscriptionDaoImpl extends AbstractDao<Subscription> implements Su
                 courseId
         );
         return subscription.isPresent();
+    }
+
+    @Override
+    public int subscriptionQuantity(long userId) throws DaoException {
+        List<Integer> count = executeQuery(
+                Sql.FIND_SUBSCRIPTION_QUANTITY.getQuery(),
+                new CountRowMapper(),
+                userId);
+        return count.get(0);
+    }
+
+    @Override
+    public int subscriptionQuantityByTeacherId(long teacherId) throws DaoException {
+        List<Integer> count = executeQuery(
+                Sql.FIND_SUBSCRIPTION_QUANTITY_BY_TEACHER_ID.getQuery(),
+                new CountRowMapper(),
+                teacherId);
+        return count.get(0);
     }
 }

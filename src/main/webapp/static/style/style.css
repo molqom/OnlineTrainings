@@ -117,7 +117,7 @@ body {
     min-width: 300px;
     right: 0;
     background-color: #a6e6ff;
-    opacity: .9;
+    opacity: .963;
     margin: 8px;
     height: 100%;
     float: left;
@@ -126,7 +126,12 @@ body {
     text-align: center;
 
 }
-
+.info h1 {
+    color: #000475;
+}
+.info h2{
+    color: #000475;
+}
 #footer {
     position: fixed;
     background-color: #000475;
@@ -140,20 +145,6 @@ body {
 }
 
 /*for trainings page*/
-/*#pages {*/
-
-/*    display: flex;*/
-/*    padding: 0;*/
-/*    list-style-type: none;*/
-/*    margin: auto;*/
-/*    background-color: #000475;*/
-/*}*/
-
-/*#pages form {*/
-/*    margin-right: 5px;*/
-/*    padding: 10px;*/
-/*    border: 1px solid black;*/
-/*}*/
 #pagination {
     display: block;
     padding: 0;
@@ -168,6 +159,7 @@ body {
     padding: 10px;
     border: 0;
     text-align: center;
+    color: blue;
 }
 #pagination button {
     background-color: #30c3fc;

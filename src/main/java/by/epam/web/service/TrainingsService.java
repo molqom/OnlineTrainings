@@ -25,22 +25,22 @@ public class TrainingsService {
             throw new ServiceException(e.getMessage(), e);
         }
     }
-    public int calculatePagesQuantity(int courseQuantityOnPage) throws DaoException {
+    public int calculatePagesQuantity(int courseQuantityOnPage) throws ServiceException {
         try (DaoHelper daoHelper = factory.create()) {
             CourseDao dao = daoHelper.createCourseDao();
             int courseQuantity = dao.courseQuantity();
             int pagesQuantity = (int)Math.ceil((double)courseQuantity / courseQuantityOnPage);
             return pagesQuantity;
-        } catch (SQLException | DaoException throwables) {
-            throw new DaoException("oops this is trouble...");
+        } catch (SQLException | DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
         }
     }
-    public List<Course> findCoursesByTeacherId(long id) throws DaoException {
+    public List<Course> findCoursesByTeacherId(long id) throws ServiceException {
         try (DaoHelper daoHelper = DaoHelperFactory.create()) {
             CourseDao dao = daoHelper.createCourseDao();
             return dao.findCoursesByTeacherId(id);
-        } catch (SQLException | DaoException throwables) {
-            throw new DaoException("oops this is trouble...");
+        } catch (SQLException | DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
         }
     }
     public void deleteCourse(long id) throws ServiceException {
@@ -48,7 +48,6 @@ public class TrainingsService {
             CourseDao dao = daoHelper.createCourseDao();
             dao.removeById(id);
         } catch (DaoException | SQLException e){
-            //logg
             throw new ServiceException(e.getMessage());
         }
     }
@@ -58,7 +57,6 @@ public class TrainingsService {
             Course course = new Course(name, teacherId);
             dao.add(course);
         } catch (DaoException | SQLException e){
-            //logg
             throw new ServiceException(e.getMessage());
         }
     }

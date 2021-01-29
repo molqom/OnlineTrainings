@@ -1,8 +1,25 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<c:set var="current" value="${param.lang}" scope="session"/>
+<c:set var="pagination" value="/WebApp/controller?command=trainings"/>
+<c:if test="${not empty current}">
+    <fmt:setLocale value="${param.lang}"/>
+</c:if>
+<fmt:setBundle basename="resources" scope="session"/>
 <html>
-    <body>
-        <h1>Oh no! Something was wrong! We need time to thinking about it....</h1>
-        <h2>
-              <a href="/WebApp/controller?command=main">Go to main page</a>
-        </h2>
-    </body>
+<head>
+    <title>Trainings page</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style/style.css">
+
+</head>
+<body>
+<div class="info">
+    <h1>Oh no! Something was wrong... Our best engineers fixing this problem right now!</h1>
+    <a href="/WebApp/controller?command=main">
+        <button class="to-registration">Main page</button>
+    </a>
+</div>
+</body>
 </html>

@@ -4,6 +4,7 @@
 <%@ page isELIgnored="false" %>
 
 <c:set var="current" value="${sessionScope.lang}" scope="session"/>
+<c:set var="pagination" value="/WebApp/controller?command=usersManage"/>
 <c:if test="${not empty current}">
     <fmt:setLocale value="${sessionScope.lang}"/>
 </c:if>
@@ -13,7 +14,7 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style/cubestyle.css">
-    <title>Admin page</title>
+    <title>Online trainings</title>
 </head>
 <body>
 <jsp:include page="parts/header.jsp"/>
@@ -53,9 +54,17 @@
         </c:forEach>
 
     </table>
+    <ul id="pagination">
+    </ul>
 </div>
 <div id="footer">
     <jsp:include page="parts/footer.jsp"/>
 </div>
+<script>
+    let currentPage = ${numOfPage};
+    let pagesQuantity = ${pagesQuantity};
+    let pagination = '${pagination}';
+</script>
+<script src="<c:url value="/static/js/coursesPagination.js"/>"></script>
 </body>
 </html>

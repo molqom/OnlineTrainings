@@ -19,7 +19,7 @@
 <div class="form">
 
     <form method="POST" action="/WebApp/controller?command=login">
-        <h1>Login page</h1>
+        <h1><fmt:message key="login.info"/></h1>
         <c:if test="${not empty errorMessage}">
         <div class="error-message">
             ${errorMessage}
@@ -34,7 +34,7 @@
     </form>
     <form method="post" action="/WebApp/controller?command=registrationPage">
         <button class="to-registration" type="submit">
-            Registration
+            <fmt:message key="button.registration"/>
         </button>
     </form>
 </div>

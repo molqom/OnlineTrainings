@@ -52,7 +52,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     }
 
     @Override
-    public List<Course> getAll() throws DaoException {
+    public List<Course> getAll(int numOfPage, int courseQuantityOnPage) throws DaoException {
         return null;
     }
 

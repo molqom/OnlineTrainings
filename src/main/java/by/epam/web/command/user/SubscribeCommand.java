@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 public class SubscribeCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(SubscribeCommand.class);
     private static final String ERROR_MESSAGE = "You already subscribe on this course!";
+    private static final String TRAININGS_PAGE_URL = "/controller?command=trainings";
 
     private final SubscriptionService service;
 
@@ -31,7 +32,7 @@ public class SubscribeCommand implements Command {
         try {
             if (!service.subscribe(courseId, userId)){
                 request.setAttribute(Parameter.ERROR_MESSAGE, ERROR_MESSAGE);
-                return CommandResult.redirect(Url.TRAININGS_CMD);
+                return CommandResult.forward(TRAININGS_PAGE_URL);
             }
             return CommandResult.redirect(Url.SUBSCRIPTIONS_CMD);
         } catch (ServiceException e) {

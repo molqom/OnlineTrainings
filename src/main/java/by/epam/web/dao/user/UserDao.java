@@ -8,7 +8,12 @@ import java.util.Optional;
 
 public interface UserDao extends Dao<User> {
     Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException;
+
     boolean isUserExist(String userName);
+
     void lockUser(long id) throws DaoException;
+
     void unlockUser(long id) throws DaoException;
+
+    int getUsersQuantity() throws DaoException;
 }

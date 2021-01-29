@@ -1,10 +1,10 @@
 let pages = document.querySelector('#pagination');
 //add
-let currentPage = '${numOfPage}';
-//
-let pagesQuantity = '${pagesQuantity}';
+// let currentPage = '${numOfPage}';
+// //
+// let pagesQuantity = '${pagesQuantity}';
 let form = document.createElement('form');
-form.setAttribute("action", '${pagination}');
+form.setAttribute("action", pagination);
 form.setAttribute("method", "POST");
 if (pagesQuantity < 6) {
     for (let i = 1; i <= pagesQuantity; i++) {
@@ -45,6 +45,7 @@ function addButton(buttonValue) {
 
 function addEllipsis() {
     let b = document.createElement('b');
+    b.setAttribute("style", "color: blue");
     b.innerText = '...';
     form.appendChild(b);
 }

@@ -14,6 +14,7 @@ public class AuthenticateFilter implements Filter {
     private final static String LOGIN_COMMAND = "/controller?command=login";
     private final static String ERROR_MESSAGE = "Next time do not try to crash our web app!";
     private final static Logger LOGGER = Logger.getLogger(AuthenticateFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -22,7 +23,7 @@ public class AuthenticateFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
-        String role = (String)session.getAttribute(Parameter.ROLE);
+        String role = (String) session.getAttribute(Parameter.ROLE);
         String command = request.getParameter(Parameter.COMMAND);
         AccessValidator validator = new AccessValidator(role);
 
@@ -35,7 +36,7 @@ public class AuthenticateFilter implements Filter {
             } else {
                 filterChain.doFilter(request, servletResponse);
             }
-            } catch (IllegalCommandException e) {
+        } catch (IllegalCommandException e) {
             LOGGER.info(e.getMessage(), e);
             session.invalidate();
             request.setAttribute(Parameter.ERROR_MESSAGE, ERROR_MESSAGE);

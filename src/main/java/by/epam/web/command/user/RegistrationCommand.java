@@ -34,8 +34,6 @@ public class RegistrationCommand implements Command {
         String surname = request.getParameter(Parameter.SURNAME);
 
         boolean valid = false;
-        //if username!valid error mess
-        //if pass!valid error mess
         try {
             RegistrationValidator validator = new RegistrationValidator();
             validator.valid(login, password, repeatPassword);

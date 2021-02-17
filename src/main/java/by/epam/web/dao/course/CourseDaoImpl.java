@@ -2,7 +2,6 @@ package by.epam.web.dao.course;
 
 import by.epam.web.dao.AbstractDao;
 import by.epam.web.entity.Course;
-import by.epam.web.enums.Sql;
 import by.epam.web.exception.DaoException;
 import by.epam.web.mapper.CountRowMapper;
 import by.epam.web.mapper.CourseRowMapper;
@@ -20,7 +19,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     @Override
     public List<Course> createList(int numOfPage, int courseQuantityOnPage) throws DaoException {
         int numberFirstCourseOnPage = (numOfPage - 1) * courseQuantityOnPage;
-        return executeQuery(Sql.FIND_COURSES_ON_CURRENT_PAGE.getQuery(),
+        return executeQuery(FIND_COURSES_ON_CURRENT_PAGE,
                 new CourseRowMapper(),
                 courseQuantityOnPage,
                 numberFirstCourseOnPage);
@@ -29,7 +28,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     @Override
     public int courseQuantity() throws DaoException {
         List<Integer> count = executeQuery(
-                Sql.FIND_COURSE_QUANTITY.getQuery(),
+                FIND_COURSE_QUANTITY,
                 new CountRowMapper());
         return count.get(0);
     }
@@ -37,7 +36,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     @Override
     public List<Course> findCoursesByTeacherId(long teacherId) throws DaoException {
         return executeQuery(
-                Sql.FIND_COURSES_FOR_CURRENT_TEACHER.getQuery(),
+                FIND_COURSES_FOR_CURRENT_TEACHER,
                 new CourseRowMapper(),
                 teacherId);
     }
@@ -45,7 +44,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     @Override
     public Optional<Course> getById(long id) throws DaoException {
         return executeForSingleResult(
-                Sql.GET_COURSE_BY_ID.getQuery(),
+                GET_COURSE_BY_ID,
                 new CourseRowMapper(),
                 id
         );
@@ -62,20 +61,20 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
         long teacherId = item.getTeacherId();
 
         execute(
-                Sql.ADD_COURSE.getQuery(),
+                ADD_COURSE,
                 name,
                 teacherId);
     }
 
     @Override
     protected String getTableName() {
-        return Sql.TABLE_COURSES.getQuery();
+        return TABLE_COURSES;
     }
 
     @Override
     public void removeById(long id) throws DaoException {
         execute(
-                Sql.DELETE_COURSE.getQuery(),
+                DELETE_COURSE,
                 id);
     }
 }

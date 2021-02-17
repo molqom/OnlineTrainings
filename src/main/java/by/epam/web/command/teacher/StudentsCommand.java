@@ -1,10 +1,8 @@
 package by.epam.web.command.teacher;
 
 import by.epam.web.command.Command;
-import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
 import by.epam.web.entity.Subscription;
-import by.epam.web.enums.Url;
 import by.epam.web.exception.ServiceException;
 import by.epam.web.service.SubscriptionService;
 import org.apache.log4j.Logger;
@@ -16,6 +14,10 @@ import java.util.List;
 
 public class StudentsCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(StudentsCommand.class);
+    private static final String ID = "id";
+    private static final String SUBSCRIPTIONS = "subscriptions";
+    private static final String NUM_OF_PAGE = "numOfPage";
+    private static final String PAGES_QUANTITY = "pagesQuantity";
     private static final int STUDENTS_QUANTITY_ON_PAGE = 2;
     private static final int DEFAULT_NUM_OF_PAGE = 1;
 
@@ -28,22 +30,22 @@ public class StudentsCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        String numOfPageParam = request.getParameter(Parameter.NUM_OF_PAGE);
+        String numOfPageParam = request.getParameter(NUM_OF_PAGE);
         int numOfPage = DEFAULT_NUM_OF_PAGE;
-        if (numOfPageParam!=null){
+        if (numOfPageParam != null) {
             numOfPage = Integer.parseInt(numOfPageParam);
         }
-        request.setAttribute(Parameter.NUM_OF_PAGE, numOfPage);
+        request.setAttribute(NUM_OF_PAGE, numOfPage);
         try {
-            long teacherId = (long) session.getAttribute(Parameter.ID);
+            long teacherId = (long) session.getAttribute(ID);
             int pagesQuantity = service.calculatePagesOfStudentQuantity(teacherId, STUDENTS_QUANTITY_ON_PAGE);
-            request.setAttribute(Parameter.PAGES_QUANTITY, pagesQuantity);
+            request.setAttribute(PAGES_QUANTITY, pagesQuantity);
             List<Subscription> subscriptions = service.findStudents(teacherId, numOfPage, STUDENTS_QUANTITY_ON_PAGE);
-            request.setAttribute(Parameter.SUBSCRIPTIONS, subscriptions);
-            return CommandResult.forward(Url.STUDENTS_PAGE);
+            request.setAttribute(SUBSCRIPTIONS, subscriptions);
+            return CommandResult.forward(STUDENTS_PAGE);
         } catch (ServiceException e) {
             LOGGER.info(e.getMessage(), e);
-            return CommandResult.forward(Url.ERROR_500);
+            return CommandResult.forward(ERROR_500);
         }
     }
 }

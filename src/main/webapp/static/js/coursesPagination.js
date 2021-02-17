@@ -1,8 +1,4 @@
 let pages = document.querySelector('#pagination');
-//add
-// let currentPage = '${numOfPage}';
-// //
-// let pagesQuantity = '${pagesQuantity}';
 let form = document.createElement('form');
 form.setAttribute("action", pagination);
 form.setAttribute("method", "POST");

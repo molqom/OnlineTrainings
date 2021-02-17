@@ -1,9 +1,7 @@
 package by.epam.web.command.user;
 
 import by.epam.web.command.Command;
-import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
-import by.epam.web.enums.Url;
 import by.epam.web.exception.CredentialValidException;
 import by.epam.web.exception.ServiceException;
 import by.epam.web.service.RegistrationService;
@@ -15,7 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
+    private static final String LOGIN = "login";
+    private static final String PASSWORD = "password";
+    private static final String REPEAT_PASSWORD = "repeat-password";
+    private final static String NAME = "name";
+    private static final String SURNAME = "surname";
+    private final static String ERROR_MESSAGE_PARAMETER= "errorMessage";
     private static final String ERROR_MESSAGE = "User with this username already exist";
+    private static final String SUCCESS_MESSAGE_PARAMETER = "successMessage";
     private static final String SUCCESS_MESSAGE = "Registration is success! Now you can log in";
 
     private final RegistrationService service;
@@ -27,19 +32,19 @@ public class RegistrationCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
 
-        String login = request.getParameter(Parameter.LOGIN);
-        String password = request.getParameter(Parameter.PASSWORD);
-        String repeatPassword = request.getParameter(Parameter.REPEAT_PASSWORD);
-        String name = request.getParameter(Parameter.NAME);
-        String surname = request.getParameter(Parameter.SURNAME);
+        String login = request.getParameter(LOGIN);
+        String password = request.getParameter(PASSWORD);
+        String repeatPassword = request.getParameter(REPEAT_PASSWORD);
+        String name = request.getParameter(NAME);
+        String surname = request.getParameter(SURNAME);
 
         boolean valid = false;
         try {
             RegistrationValidator validator = new RegistrationValidator();
             validator.valid(login, password, repeatPassword);
         } catch (CredentialValidException e) {
-            request.setAttribute(Parameter.ERROR_MESSAGE, e.getMessage());
-            return CommandResult.forward(Url.REGISTRATION_PAGE);
+            request.setAttribute(ERROR_MESSAGE_PARAMETER, e.getMessage());
+            return CommandResult.forward(REGISTRATION_PAGE);
         }
         try {
             service.registration(login, password, name, surname);
@@ -49,11 +54,11 @@ public class RegistrationCommand implements Command {
             e.printStackTrace();
         }
         if (valid) {
-            request.setAttribute(Parameter.SUCCESS_MESSAGE, SUCCESS_MESSAGE);
-            return CommandResult.redirect(Url.LOGIN_CMD);
+            request.setAttribute(SUCCESS_MESSAGE_PARAMETER, SUCCESS_MESSAGE);
+            return CommandResult.redirect(LOGIN_CMD);
         } else {
-            request.setAttribute(Parameter.ERROR_MESSAGE, ERROR_MESSAGE);
-            return CommandResult.redirect(Url.REGISTRATION_PAGE);
+            request.setAttribute(ERROR_MESSAGE_PARAMETER, ERROR_MESSAGE);
+            return CommandResult.redirect(REGISTRATION_PAGE);
         }
     }
 }

@@ -2,7 +2,6 @@ package by.epam.web.dao.user;
 
 import by.epam.web.dao.AbstractDao;
 import by.epam.web.entity.User;
-import by.epam.web.enums.Sql;
 import by.epam.web.exception.DaoException;
 import by.epam.web.mapper.CountRowMapper;
 import by.epam.web.mapper.UserRowMapper;
@@ -21,7 +20,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     public Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException {
 
         return executeForSingleResult(
-                Sql.FIND_BY_LOGIN_AND_PASSWORD.getQuery(),
+                FIND_BY_LOGIN_AND_PASSWORD,
                 new UserRowMapper(),
                 login,
                 password
@@ -36,14 +35,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public void lockUser(long id) throws DaoException {
         execute(
-                Sql.LOCK_USER.getQuery(),
+                LOCK_USER,
                 id);
     }
 
     @Override
     public void unlockUser(long id) throws DaoException {
         execute(
-                Sql.UNLOCK_USER.getQuery(),
+                UNLOCK_USER,
                 id);
     }
 
@@ -61,7 +60,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
 
         execute(
-                Sql.SAVE_USER.getQuery(),
+                SAVE_USER,
                 login,
                 password,
                 name,
@@ -77,7 +76,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     public List<User> getAll(int numOfPage, int usersQuantityOnPage) throws DaoException {
         int numFirstUserOnPage = (numOfPage - 1) * usersQuantityOnPage;
         return executeQuery(
-                Sql.FIND_ALL_USERS.getQuery(),
+                FIND_ALL_USERS,
                 new UserRowMapper(),
                 usersQuantityOnPage,
                 numFirstUserOnPage);
@@ -86,13 +85,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public int getUsersQuantity() throws DaoException {
         List<Integer> count = executeQuery(
-                Sql.FIND_USER_QUANTITY.getQuery(),
+                FIND_USER_QUANTITY,
                 new CountRowMapper());
         return count.get(0);
     }
 
     @Override
     protected String getTableName() {
-        return Sql.TABLE_USERS.getQuery();
+        return TABLE_USERS;
     }
 }

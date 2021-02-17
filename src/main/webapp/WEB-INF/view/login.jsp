@@ -16,6 +16,7 @@
     <title>Online trainings</title>
 </head>
 <body>
+<jsp:include page="parts/header.jsp"/>
 <div class="form">
 
     <form method="POST" action="/WebApp/controller?command=login">
@@ -30,7 +31,7 @@
         <input type="password" placeholder="Enter Password" name="password" pattern="\w{8,32}"
                title="Password must have from 8 to 32 symbols" required>
 
-        <button class="submit" type="submit">Login</button>
+        <button class="submit" type="submit"><fmt:message key="button.login"/></button>
     </form>
     <form method="post" action="/WebApp/controller?command=registrationPage">
         <button class="to-registration" type="submit">

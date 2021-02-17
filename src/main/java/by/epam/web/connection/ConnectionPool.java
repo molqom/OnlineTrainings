@@ -11,7 +11,8 @@ public class ConnectionPool {
     private static final int POOL_SIZE = 10;
     private final Queue<ProxyConnection> availableConnections;
     private final Queue<ProxyConnection> connectionsInUse;
-    private static final ReentrantLock LOCKER = new ReentrantLock();
+    private static final ReentrantLock INSTANCE_LOCKER = new ReentrantLock();
+    private static final ReentrantLock CONNECTION_LOCKER = new ReentrantLock();
     private static ConnectionPool instance;
 
     private ConnectionPool() {
@@ -26,28 +27,28 @@ public class ConnectionPool {
 
     public static ConnectionPool getInstance() {
         if (instance == null) {
-            LOCKER.lock();
+            INSTANCE_LOCKER.lock();
             if (instance == null) {
                 instance = new ConnectionPool();
             }
-            LOCKER.unlock();
+            INSTANCE_LOCKER.unlock();
         }
         return instance;
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
-        LOCKER.lock();
+        CONNECTION_LOCKER.lock();
         try {
             if (connectionsInUse.contains(proxyConnection)) {
                 connectionsInUse.remove(proxyConnection);
                 availableConnections.offer(proxyConnection);
             }
         } finally {
-            LOCKER.unlock();
+            CONNECTION_LOCKER.unlock();
         }
     }
     public ProxyConnection getConnection() throws ConnectionException {
-        LOCKER.lock();
+        CONNECTION_LOCKER.lock();
         try {
             if (availableConnections.isEmpty()) {
                 throw new ConnectionException("Not available connection!");
@@ -56,17 +57,14 @@ public class ConnectionPool {
             connectionsInUse.offer(connection);
             return connection;
         } finally {
-            LOCKER.unlock();
+            CONNECTION_LOCKER.unlock();
         }
     }
-
     public void destroy() {
-        for (ProxyConnection connection: connectionsInUse
-             ) {
+        for (ProxyConnection connection: connectionsInUse) {
             returnConnection(connection);
         }
-        for (ProxyConnection connection: availableConnections
-             ) {
+        for (ProxyConnection connection: availableConnections) {
             try {
                 connection.destroy();
             } catch (SQLException e) {

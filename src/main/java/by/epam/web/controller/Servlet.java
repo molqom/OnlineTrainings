@@ -33,6 +33,7 @@ public class Servlet extends HttpServlet {
             CommandResult commandResult = command.execute(req, resp);
             dispatch(commandResult, req, resp);
         } catch (ServletException e) {
+            //logg
             e.printStackTrace();
         }
     }

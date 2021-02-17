@@ -29,7 +29,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
             }
             return entities;
         } catch (SQLException e) {
-            throw new DaoException(e.getMessage());
+            throw new DaoException(e.getMessage(), e);
         }
     }
     protected boolean execute(String query, Object... params) throws DaoException {

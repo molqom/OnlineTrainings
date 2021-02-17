@@ -1,9 +1,7 @@
 package by.epam.web.command.admin;
 
 import by.epam.web.command.Command;
-import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
-import by.epam.web.enums.Url;
 import by.epam.web.exception.ServiceException;
 import by.epam.web.service.AdminService;
 import org.apache.log4j.Logger;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LockCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(LockCommand.class);
+    public final static String LOCK = "lock";
+
 
     private final AdminService service;
 
@@ -23,14 +23,14 @@ public class LockCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
 
-        String stringUserId = request.getParameter(Parameter.LOCK);
+        String stringUserId = request.getParameter(LOCK);
         long userId = Long.parseLong(stringUserId);
         try {
             service.lockUser(userId);
-            return CommandResult.redirect(Url.USERS_MANAGE_CMD);
+            return CommandResult.redirect(USERS_MANAGE_CMD);
         } catch (ServiceException e) {
             LOGGER.info(e.getMessage(), e);
-            return CommandResult.forward(Url.ERROR_500);
+            return CommandResult.forward(ERROR_500);
         }
     }
 }

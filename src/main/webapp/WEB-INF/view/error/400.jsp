@@ -16,10 +16,10 @@
 </head>
 <body>
 <div class="info">
-    <h1>Oh no! This page does not exist!</h1>
+    <h1><fmt:message key="error.400"/></h1>
 
     <a href="/WebApp/controller?command=main">
-        <button class="to-registration">Main page</button>
+        <button class="to-registration"><fmt:message key="menu.main"/></button>
     </a>
 </div>
 </body>

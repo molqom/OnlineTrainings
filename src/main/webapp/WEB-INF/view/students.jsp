@@ -24,11 +24,11 @@
     <h1>Students:</h1>
     <table class="table">
         <tr>
-            <th><fmt:message key="table.course.name"></th>
-            <th><fmt:message key="table.student.name"></th>
-            <th><fmt:message key="table.student.surname"></th>
-            <th><fmt:message key="table.grade"></th>
-            <th><fmt:message key="table.feedback"></th>
+            <th><fmt:message key="table.course.name"/></th>
+            <th><fmt:message key="table.student.name"/></th>
+            <th><fmt:message key="table.student.surname"/></th>
+            <th><fmt:message key="table.grade"/></th>
+            <th><fmt:message key="table.feedback"/></th>
         </tr>
 
         <c:forEach items="${subscriptions}" var="subscription">
@@ -52,7 +52,7 @@
                                 <option value="10">10</option>
                             </select>
                             <input type="hidden" name="subscription_id" value="${subscription.id}">
-                            <button class="submit" type="submit">Confirm</button>
+                            <button class="submit" type="submit"><fmt:message key="button.confirm"/></button>
                         </form>
                     </td>
                 </c:if>

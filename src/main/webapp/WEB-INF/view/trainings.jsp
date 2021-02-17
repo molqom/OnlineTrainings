@@ -20,7 +20,7 @@
 <jsp:include page="parts/menu.jsp"/>
 
 <div class="info">
-    <h1>Trainings list:</h1>
+    <h1><fmt:message key="trainings" /></h1>
     <c:if test="${not empty errorMessage}">
         <div class="error-message">
                 ${errorMessage}
@@ -28,8 +28,8 @@
     </c:if>
     <table class="table">
         <tr>
-            <th>Name</th>
-            <th>Teacher</th>
+            <th><fmt:message key="table.name"/> </th>
+            <th><fmt:message key="table.teacher"/></th>
         </tr>
 
         <c:forEach items="${courses}" var="course">
@@ -47,7 +47,7 @@
                     <td>
                         <form action="/WebApp/controller?command=subscribe" method="post">
                             <button class="subscribe-button" name="course_id" type="submit" value="${course.id}">
-                                Subscribe
+                                <fmt:message key="button.subscribe"/>
                             </button>
                         </form>
                     </td>

@@ -20,34 +20,40 @@
 <jsp:include page="parts/header.jsp"/>
 <jsp:include page="parts/menu.jsp"/>
 <div class="info">
-    <h1>Admin page</h1>
-    <h2>List of users:</h2>
+    <h2><fmt:message key="users"/> </h2>
     <table class="table">
         <tr>
-            <th>id</th>
-            <th>login</th>
-            <th>name</th>
-            <th>surname</th>
-            <th>role</th>
-            <th>active</th>
+            <th><fmt:message key="table.login" /></th>
+            <th><fmt:message key="table.name" /></th>
+            <th><fmt:message key="table.surname" /></th>
+            <th><fmt:message key="table.role" /></th>
+            <th><fmt:message key="table.active" /></th>
         </tr>
 
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
                 <td>${user.login}</td>
                 <td>${user.name}</td>
                 <td>${user.surname}</td>
                 <td>${user.role}</td>
-                <td>${user.active}</td>
+                <c:if test="${user.active == 'TRUE'}">
+                    <td>Active</td>
+                </c:if>
+                <c:if test="${user.active == 'FALSE'}">
+                    <td>Ban</td>
+                </c:if>
                 <td>
                     <form action="/WebApp/controller?command=lock" method="post">
-                        <button class="lock-button" name="lock" type="submit" value="${user.id}">Lock</button>
+                        <button class="lock-button" name="lock" type="submit" value="${user.id}">
+                            <fmt:message key="button.lock"/>
+                        </button>
                     </form>
                 </td>
                 <td>
                     <form action="/WebApp/controller?command=unlock" method="post">
-                        <button class="unlock-button" name="unlock" type="submit" value="${user.id}">Unlock</button>
+                        <button class="unlock-button" name="unlock" type="submit" value="${user.id}">
+                            <fmt:message key="button.unlock"/>
+                        </button>
                     </form>
                 </td>
             </tr>

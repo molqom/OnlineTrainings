@@ -16,7 +16,7 @@ body {
     min-width: 350px;
     height: 100%;
     font-size: 250%;
-    /*font-family: "Apple Braille";*/
+    font-family: "Apple Braille";
     text-align: center;
 
 }

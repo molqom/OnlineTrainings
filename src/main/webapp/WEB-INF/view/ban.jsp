@@ -20,7 +20,7 @@
     <h2><fmt:message key="ban.info"/></h2>
 
     <a href="/WebApp/controller?command=login">
-        <button class="to-registration">Login page</button>
+        <button class="to-registration"><fmt:message key="button.login.page"/> </button>
     </a>
 </div>
 

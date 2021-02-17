@@ -1,10 +1,8 @@
 package by.epam.web.command.user;
 
 import by.epam.web.command.Command;
-import by.epam.web.constant.Parameter;
 import by.epam.web.entity.CommandResult;
 import by.epam.web.entity.User;
-import by.epam.web.enums.Url;
 import by.epam.web.exception.ServiceException;
 import by.epam.web.service.UserService;
 import org.apache.log4j.Logger;
@@ -16,7 +14,13 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
+    private static final String ID = "id";
+    private final static String ROLE = "role";
+    private static final String ACTIVE = "active";
+    private static final String LOGIN = "login";
+    private static final String PASSWORD = "password";
     private static final String BAN = "ban";
+    private final static String ERROR_MESSAGE_PARAMETER = "errorMessage";
     private static final String ERROR_MESSAGE = "Invalid creeds!";
 
     private final UserService service;
@@ -29,29 +33,29 @@ public class LoginCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
 
-        String login = request.getParameter(Parameter.LOGIN);
-        String password = request.getParameter(Parameter.PASSWORD);
+        String login = request.getParameter(LOGIN);
+        String password = request.getParameter(PASSWORD);
 
         try {
             Optional<User> optUser = service.login(login, password);
             if (optUser.isPresent()) {
                 User user = optUser.get();
                 if (!user.isActive()) {
-                    session.setAttribute(Parameter.ACTIVE, BAN);
-                    return CommandResult.redirect(Url.BAN_CMD);
+                    session.setAttribute(ACTIVE, BAN);
+                    return CommandResult.redirect(BAN_CMD);
                 }
-                session.setAttribute(Parameter.ID, user.getId());
-                session.setAttribute(Parameter.ROLE, user.getRole().toString());
-                return CommandResult.redirect(Url.MAIN_CMD);
+                session.setAttribute(ID, user.getId());
+                session.setAttribute(ROLE, user.getRole().toString());
+                return CommandResult.redirect(MAIN_CMD);
             }
         } catch (ServiceException e) {
             LOGGER.info(e.getMessage(), e);
-            return CommandResult.forward(Url.ERROR_500);
+            return CommandResult.forward(ERROR_500);
 
         }
         if (login != null && password != null) {
-            request.setAttribute(Parameter.ERROR_MESSAGE, ERROR_MESSAGE);
+            request.setAttribute(ERROR_MESSAGE_PARAMETER, ERROR_MESSAGE);
         }
-        return CommandResult.forward(Url.LOGIN_PAGE);
+        return CommandResult.forward(LOGIN_PAGE);
     }
 }

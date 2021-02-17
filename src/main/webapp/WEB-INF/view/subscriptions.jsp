@@ -21,15 +21,15 @@
 <jsp:include page="parts/header.jsp"/>
 <jsp:include page="parts/menu.jsp"/>
 <div class="info">
-    <h1>Subscriptions</h1>
+    <h1><fmt:message key="menu.subscriptions"/></h1>
 
     <table class="table">
         <tr>
-            <th>Course name</th>
-            <th>Teacher name</th>
-            <th>Teacher surname</th>
-            <th>Grade</th>
-            <th>Feedback</th>
+            <th><fmt:message key="table.course.name"/> </th>
+            <th><fmt:message key="table.teacher.name"/></th>
+            <th><fmt:message key="table.teacher.surname"/></th>
+            <th><fmt:message key="table.grade"/></th>
+            <th><fmt:message key="table.feedback"/></th>
         </tr>
 
         <c:forEach items="${subscriptions}" var="subscription">
@@ -47,7 +47,7 @@
                 <td>
                     <form action="/WebApp/controller?command=unsubscribe" method="post">
                         <button class="lock-button" name="subscription_id" type="submit" value="${subscription.id}">
-                            Unsubscribe
+                           <fmt:message key="button.unsubscribe"/>
                         </button>
                     </form>
                 </td>

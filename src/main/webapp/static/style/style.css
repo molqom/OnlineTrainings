@@ -1,0 +1,282 @@
+/*@media only screen and (max-width: 800px) {*/
+body {
+    background-image: url("../image/trainings.jpeg");
+    background-color: #a6e6ff;
+}
+#header {
+    background-color: rgba(0,4,117,.9);
+    color: #a6e6ff;
+    height: 60px;
+    position: relative;
+    border-radius: 10px;
+}
+
+#header-name {
+    width: 350px;
+    min-width: 350px;
+    height: 100%;
+    font-size: 250%;
+    font-family: "Apple Braille";
+    text-align: center;
+
+}
+#date {
+    width: 130px;
+    position: absolute;
+    right: 30%;
+    top: 20px;
+    background-color: #dbf8ff;
+    color: #000475;
+    text-align: center;
+    border-radius: 10px;
+}
+#logout {
+    position: absolute;
+    width: 15%;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+
+#logout button {
+    height: 40%;
+    width: 60px;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    color: #000475;
+    border: 0;
+    border-radius: 5px;
+    background-color: #dbf8ff;
+}
+#logout button:hover{
+    background-color: #000475;
+    color: white;
+}
+
+#lang {
+    position: absolute;
+    top: 25%;
+    right: 15%;
+    height: 50%;
+    width: 100px;
+}
+
+#lang button {
+    top: 30%;
+    padding: 2px;
+    margin: 2px;
+    color: #000475;
+    border: 0;
+    border-radius: 3px;
+    background-color: #dbf8ff;
+}
+#lang button:hover{
+    background-color: #000475;
+    color: white;
+}
+
+.menu {
+    position: absolute;
+    margin: 8px;
+    left: 0;
+    float: left;
+    border-radius: 10px;
+}
+.menu-ul {
+    /*list-style-type: none;*/
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #000475;
+    opacity: .9;
+    border-radius: 10px;
+}
+
+.menu-ul li a {
+    display: block;
+    color: #a6e6ff;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+.menu-ul li a:hover {
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+}
+
+.menu h3 {
+    margin-left: 15px;
+}
+
+.info {
+    position: absolute;
+    width: 80%;
+    min-width: 300px;
+    right: 0;
+    background-color: #a6e6ff;
+    opacity: .963;
+    margin: 8px;
+    height: 100%;
+    float: left;
+    border-radius: 10px;
+    color: #a6e6ff;
+    text-align: center;
+
+}
+.info h1 {
+    color: #000475;
+}
+.info h2{
+    color: #000475;
+}
+#footer {
+    position: fixed;
+    background-color: #000475;
+    opacity: .9;
+    color: #a6e6ff;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    bottom: 0;
+}
+
+/*for trainings page*/
+#pagination {
+    display: block;
+    padding: 0;
+    list-style-type: none;
+    margin: auto;
+    width: 25%;
+    background-color: #dbf8ff;
+    border-radius: 10px;
+}
+#pagination form {
+    margin: auto;
+    padding: 10px;
+    border: 0;
+    text-align: center;
+    color: blue;
+}
+#pagination button {
+    background-color: #30c3fc;
+    margin: 5px;
+    border: 0;
+    border-radius: 3px;
+}
+
+/*to login and registration page*/
+.form {
+    background-color: #a6e6ff;
+    opacity: .963;
+    width: 500px;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+}
+.form h1 {
+    color: #000475;
+    padding: 20px;
+}
+.form input {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.submit {
+    margin: 10px;
+    width: 150px;
+    height: 40px;
+    background-color: lightgreen;
+    border: 0;
+    border-radius: 10px;
+}
+.submit:hover {
+    border: 2px solid green;
+}
+.to-registration {
+    margin: 10px;
+    width: 150px;
+    height: 40px;
+    background-color: deepskyblue;
+    border: 0;
+    border-radius: 10px;
+}
+.to-registration:hover{
+    border: 2px solid blue;
+}
+.error-message {
+    background-color: red;
+    width: 80%;
+    margin: auto;
+    height: 25px;
+    border-radius: 7px;
+    color: black;
+    font-size: large;
+}
+/*for tables*/
+.table {
+    text-align: left;
+    width: 80%;
+    margin: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: #cccccc;
+    color: #000475;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.table td {
+    border: 1px solid deepskyblue;
+    background-color: beige;
+    width: 100px;
+    text-align: center;
+}
+.table td:hover {
+    background-color: bisque;
+}
+
+.lock-button {
+    width: 100px;
+    height: 30px;
+    background-color: red;
+    color: #dbf8ff;
+    border: 0;
+    border-radius: 5px;
+    margin: auto;
+}
+.lock-button:hover {
+    border: 1px solid white;
+}
+.unlock-button {
+    width: 100px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    border: 0;
+    border-radius: 5px;
+}
+.unlock-button:hover {
+    border: 1px solid black;
+}
+.subscribe-button {
+    width: 100px;
+    height: 30px;
+    background-color: blue;
+    color: #dbf8ff;
+    border: 0;
+    border-radius: 5px;
+}
